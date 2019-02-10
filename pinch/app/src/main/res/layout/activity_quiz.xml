@@ -43,9 +43,10 @@
 
             <ImageView
                 android:id="@+id/question"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
+                android:scaleType="fitXY"
                 android:src="@drawable/placeholder" />
             <HorizontalScrollView
                 android:id="@+id/horizontal"
