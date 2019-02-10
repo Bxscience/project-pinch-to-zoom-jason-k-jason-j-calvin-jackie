@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".QuizActivity">
+
+    <TextView
+        android:id="@+id/text_view_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score: 0"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/text_view_question_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_view_score"
+        android:text="Question: 1/x"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/text_view_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/text_view_question_count"
+        android:gravity="right"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="Category:" />
+    <ScrollView
+        android:id="@+id/vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_view_question_count"
+        android:layout_above="@+id/bottom">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/placeholder" />
+            <HorizontalScrollView
+                android:id="@+id/horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/question"
+                >
+                <RadioGroup
+                    android:id="@+id/radio_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true">
+
+                    <RadioButton
+                        android:id="@+id/radio_button1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layoutDirection="rtl"
+                        android:tag="A"
+                        android:text="(A)"
+                        android:textAlignment="textStart" />
+
+                    <RadioButton
+                        android:id="@+id/radio_button2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layoutDirection="rtl"
+                        android:tag="B"
+                        android:text="(B)"
+                        android:textAlignment="textStart" />
+
+                    <RadioButton
+                        android:id="@+id/radio_button3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layoutDirection="rtl"
+                        android:tag="C"
+                        android:text="(C)"
+                        android:textAlignment="textStart" />
+
+                    <RadioButton
+                        android:id="@+id/radio_button4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layoutDirection="rtl"
+                        android:tag="D"
+                        android:text="(D)"
+                        android:textAlignment="textStart" />
+
+                    <RadioButton
+                        android:id="@+id/radio_button5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layoutDirection="rtl"
+                        android:tag="E"
+                        android:text="(E)"
+                        android:textAlignment="textStart" />
+
+                </RadioGroup>
+            </HorizontalScrollView>
+        </RelativeLayout>
+    </ScrollView>
+
+
+    <RelativeLayout
+        android:id="@+id/bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+        <ImageView
+            android:id="@+id/check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignBottom="@+id/selectedAnswer"
+            />
+        <TextView
+            android:id="@+id/selectedAnswer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/check"
+            android:text="Selected Answer:"/>
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/selectedAnswer"
+            android:layout_marginTop="16dp"
+            android:text="Submit" />
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/submitButton"
+            android:text="Previous" />
+
+        <Button
+            android:id="@+id/nextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/submitButton"
+            android:text="Next" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
