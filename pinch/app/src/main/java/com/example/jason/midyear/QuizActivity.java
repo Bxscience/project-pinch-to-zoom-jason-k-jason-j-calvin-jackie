@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -45,12 +47,15 @@ public class QuizActivity extends AppCompatActivity {
     private int score;
     private boolean answered;
     private boolean resubmitted;
-
+    private ScaleGestureDetector mScaleGestureDetector;
+    private float mScaleFactor = 1.0f;
+    private ImageView mImageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
-
+        mImageView=(ImageView)findViewById(R.id.question);
+        mScaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
         textViewScore = findViewById(R.id.text_view_score);
         textViewQuestionCount = findViewById(R.id.text_view_question_count);
         rbGroup = findViewById(R.id.radio_group);
@@ -240,5 +245,43 @@ public class QuizActivity extends AppCompatActivity {
         rb3.setText("(C)");
         rb4.setText("(D)");
         rb5.setText("(E)");
+    }
+    private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
+        @Override
+        public boolean onScale(ScaleGestureDetector scaleGestureDetector){
+            mScaleFactor *= scaleGestureDetector.getScaleFactor();
+            mScaleFactor = Math.max(0.1f,
+                    Math.min(mScaleFactor, 10.0f));
+            question.setScaleX(mScaleFactor);
+            question.setScaleY(mScaleFactor);
+            return true;
+        }
+    }
+    public boolean isWithinQuestionBounds(int xPoint, int yPoint) {
+               int[] l = new int[2];
+               question.getLocationOnScreen(l);
+               int x = l[0];
+               int y = l[1];
+               int w = question.getWidth();
+               int h = question.getHeight();
+
+               if (xPoint< x || xPoint> x + w || yPoint< y || yPoint> y + h) {
+                   return false;
+               }
+               return true;
+           }
+    public boolean dispatchTouchEvent(MotionEvent motionEvent) {
+              if(isWithinQuestionBounds(Math.round(motionEvent.getRawX()), Math.round(motionEvent.getRawY())))
+              {
+                  mScaleGestureDetector.onTouchEvent(motionEvent);
+
+                  return true;
+              } else {
+
+                  return super.dispatchTouchEvent(motionEvent);
+              }
+
+
+
     }
 }
